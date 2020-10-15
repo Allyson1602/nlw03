@@ -1,0 +1,70 @@
+comando para criar package.json: yarn init -y
+
+pacote express: yarn add express // ajuda a configurar rotas ajuda no request e response
+
+yan add @types/express -D // configuração no visual studio
+
+yarn add typescript -D // instalação do typescript
+
+yarn tsc --init // cria arquivo tsconfig.json
+
+no arquivo tsconfig.json, na linha 7 trocar "target": "es5", por "target": "es2017", que é a versão do ecmascript
+
+yarn add ts-node-dev -D // utilizar typescript e node
+
+para utilizar scripts personalizados, adicionar no package.json:
+"scripts":{
+    "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts"
+},
+--transpile-only // apenas executa o codigo sem verificar erros
+--ignore-watch node_modules // ignora arquivos do node_modules
+yarn dev // para fazer a aplicação funcionar // abrir localhost:3333 e ver erro(ok)
+
+yarn add typeorm sqlite3 // para criar banco de dados. talvez reiniciar vscode e instalar um de cada vez
+criar pasta database e colocar database.sqlite
+na pasta backend criar ormconfig.json // configuração do bd sqlite com orm
+na pasta database criar arquivo connection.ts
+yarn dev // feita conexão com bd
+
+yarn typeorm // mostra comandos
+para utilizar scripts personalizados, adicionar no package.json:
+"scripts":{
+    "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts",
+    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js" // adicionar para usar o orm com typescript inves de javascript
+},
+yarn typeorm // para verificar se deu certo, fica cli.js no retorno do terminal
+adicionar codigo no ormconfig.json "migrations" e "cli"
+yarn typeorm migration:create -n create_orphanages // essa migration cria uma tabela de orfanatos(orphanages)
+é gerado um arquivo na pasta migrations
+neste arquivo fazer import {MigrationInterface, QueryRunner, Table} from "typeorm"; e por codigo (await) // para criar tabela no bd
+no bd unsigned: true significa que sempre deve ser um número positivo
+yarn typeorm migration:run // executar após ter criado a tabela, cria tabela para o arquivo database.sqlite
+instalar beekeeper studio para ver dados no banco de dados sqlite
+no beekeeper selecionar sqlite, selecionar database.sqlite, save connection como NLW #03, seleciona cor, save, connect
+
+criar pasta models no src do backend
+em models criar Orphanages.ts
+
+opening_hours // campo não foi criado na tabela
+yarn typeorm migration:revert // desfaz migration feita anteriormente, se atualizar beekeeper a tabela não vai estar mais lá
+yarn typeorm migrations:run // após criar o campo opening_hours
+
+ir em tsconfig.json e trocar o 'strictPropertyInitialization' na linha 33 e para false // remove erros dos campos das tabelas no Orphanage.ts pois não é mais necessário atribuir um valor inicial nem nada inicial
+ir em tsconfig.json e descomentar experimentalDecorators linha 62 e emitDecoratorMetadata linha 63 // habilita uma api Decorator para o typescript
+
+no arquivo ormconfig.json
+para o typeorm saber onde estão as entidades e os models da aplicação
+"entities": [
+    "./src/models/*.ts"
+],
+
+yarn typeorm migration:create -n create_imagens // cria tabela de imagens
+yarn typeorm migration:run // executar nova tabela
+yarn add multer // lida com upload de imagens
+yarn add @types/multer -D // configuração vscode
+
+yarn add express-async-errors // caso tiver, mostrar erros
+
+yarn add yup // modulo de validação
+yarn add @types/yup -D
+yarn add cors // permite que a aplicação seja acessível de diferentes domínios
