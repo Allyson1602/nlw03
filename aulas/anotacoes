@@ -1,0 +1,14 @@
+ npm install -g expo-cli /OU/ yarn global add expo-cli // instalação do expo para desenvolvimento mobile
+ expo init mobile // selecionar Blank (TypeScript)
+
+ expo install react-native-maps // para mapas
+ expo start // iniciar expo
+ expo install @expo-google-fonts/nunito expo-font // instalar fonte nunino do google fontes no expo
+
+ yarn add @react-navigation/native // navegação
+ expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view // instalação de pacotes
+ yarn add @react-navigation/stack // instalação de biblioteca para navegação
+
+ yarn add axios // chamadas http (request, response)
+
+ expo install expo-image-picker
